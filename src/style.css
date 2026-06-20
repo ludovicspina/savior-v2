@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+:root,
+:root[data-theme="dark"] {
+  --accent: #f59e0b;
+  --accent-muted: #f59e0b33;
+  --accent-strong: #fbbf24;
+  --bg-base: #0c0f14;
+  --bg-elevated: #12161d;
+  --bg-panel: #171c26;
+  --surface-2: #1c2230;
+  --surface-3: #252c3a;
+  --border: #2a3344;
+  --border-muted: #222833;
+  --text: #e8edf5;
+  --text-muted: #8b96a8;
+  --text-faint: #5c677a;
+  --status-ok: #22c55e;
+  --status-warn: #f59e0b;
+  --status-crit: #ef4444;
+}
+
+:root[data-theme="light"] {
+  --accent: #d97706;
+  --accent-muted: #d9770633;
+  --accent-strong: #b45309;
+  --bg-base: #f4f6f9;
+  --bg-elevated: #ffffff;
+  --bg-panel: #ffffff;
+  --surface-2: #eef1f6;
+  --surface-3: #e2e8f0;
+  --border: #cbd5e1;
+  --border-muted: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --status-ok: #16a34a;
+  --status-warn: #d97706;
+  --status-crit: #dc2626;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text);
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: "JetBrains Mono", "Cascadia Code", "SF Mono", ui-monospace, monospace;
+}
+
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.card-header {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}

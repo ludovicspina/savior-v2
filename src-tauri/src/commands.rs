@@ -93,6 +93,14 @@ pub async fn set_deep_sensors(
 }
 
 #[tauri::command]
+pub async fn set_deep_mode(
+    state: State<'_, SensorState>,
+    enabled: bool,
+) -> Result<(), String> {
+    set_deep_sensors(state, enabled).await
+}
+
+#[tauri::command]
 pub async fn get_sensor_snapshot(
     state: State<'_, SensorState>,
 ) -> Result<SensorSnapshot, String> {

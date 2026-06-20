@@ -1,5 +1,6 @@
 mod commands;
 mod sensors;
+mod system;
 
 use commands::SensorState;
 use sensors::create_source;
@@ -20,6 +21,10 @@ pub fn run() {
             commands::stop_sensors,
             commands::set_deep_sensors,
             commands::get_sensor_snapshot,
+            system::system_info,
+            system::is_elevated,
+            system::current_os,
+            commands::set_deep_mode,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
