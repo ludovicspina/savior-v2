@@ -2,6 +2,6 @@
   "$schema": "https://schema.tauri.app/config/2",
   "bundle": {
     "externalBin": ["binaries/savior-sensord"],
-    "targets": ["nsis"]
+    "targets": []
   }
 }

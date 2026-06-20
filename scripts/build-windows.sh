@@ -16,11 +16,9 @@ is_windows_host() {
 }
 
 if is_windows_host; then
-  cargo tauri build --bundles nsis
+  cargo tauri build --no-bundle
+  bash scripts/package-windows-portable.sh
   echo ""
-  echo "Windows build complete."
-  echo "Installer: src-tauri/target/release/bundle/nsis/"
-  echo "Binary:    src-tauri/target/release/savior.exe"
   echo "Requires WebView2 runtime on target machine (pre-installed on Windows 10/11)."
 else
   echo ""
@@ -29,11 +27,10 @@ else
   echo "  Sidecar : src-tauri/binaries/savior-sensord-x86_64-pc-windows-msvc.exe"
   echo "  Frontend: dist/"
   echo ""
-  echo "Le bundle Tauri (.exe / NSIS) ne peut pas être produit nativement sous Linux."
-  echo "Sur une machine Windows (ou GitHub Actions windows-latest), lancer :"
+  echo "Le bundle Tauri portable ne peut pas être produit nativement sous Linux."
+  echo "Sur Windows ou CI windows-latest :"
   echo ""
-  echo "  npm run build"
-  echo "  cargo tauri build --bundles nsis"
+  echo "  bash scripts/build-windows.sh"
   echo ""
-  echo "Copier le sidecar déjà buildé si besoin, ou relancer scripts/build-sidecar.sh sous Windows."
+  echo "Artefact : src-tauri/target/release/bundle/Savior_*_x64-portable.zip"
 fi

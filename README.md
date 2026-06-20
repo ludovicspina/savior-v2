@@ -2,7 +2,7 @@
 
 Desktop technician toolkit for real-time hardware monitoring (CPU, RAM, GPU, disks, SMART). Built with **Tauri 2**, **Vue 3**, and a **C# .NET 8 sidecar** (Windows) powered by LibreHardwareMonitor.
 
-> **Important:** A single cross-platform binary is **not possible**. Savior produces **two portable single-file artifacts** — one per OS (Windows `.exe` + sidecar, Linux `.AppImage`).
+> **Important:** A single cross-platform binary is **not possible**. Savior produces **two portable artifacts** — Linux: one `.AppImage` ; Windows: one `.zip` portable (exe + sidecar, sans installateur).
 
 ## Stack
 
@@ -67,37 +67,28 @@ chmod +x Savior_0.1.0_amd64.AppImage
 - WebKitGTK et les libs nécessaires sont **emballées dedans** (~100 Mo). Aucun `dnf install` requis sur la machine cible.
 - Sur certaines distros sans FUSE monté : `APPIMAGE_EXTRACT_AND_RUN=1 ./Savior_*.AppImage`
 
-### Windows portable (sidecar bundled)
+### Windows portable (sans installateur, clé USB)
 
 ```bash
 bash scripts/build-windows.sh
 ```
 
-**Depuis Fedora/Linux** : le script cross-compile le sidecar C# + le frontend, puis s'arrête (pas de `.exe` Tauri — impossible sans hôte Windows).
+**Depuis Fedora/Linux** : cross-compile sidecar + frontend seulement (pas de zip final).
 
-**Sur Windows ou CI `windows-latest`** : produit l'installateur NSIS + `savior.exe` avec le sidecar bundlé.
+**Sur Windows ou CI `windows-latest`** : produit un **zip portable** (pas d'installateur NSIS).
 
-```bash
-npm run build
-cargo tauri build --bundles nsis
-# Output: src-tauri/target/release/bundle/nsis/
-#         src-tauri/target/release/savior.exe
+```
+src-tauri/target/release/bundle/Savior_0.1.0_x64-portable.zip
 ```
 
-For a **portable NSIS installer** (no install step), enable in `src-tauri/tauri.conf.json`:
+**Utilisation technicien (clé USB) :**
+1. Copier le `.zip` sur la clé
+2. Extraire une fois (ex. `E:\Savior\`)
+3. Lancer **`Savior.exe`** — aucune installation, rien dans Program Files
 
-```json
-"bundle": {
-  "windows": {
-    "nsis": {
-      "installerIcon": "icons/icon.ico",
-      "displayLanguageSelector": false
-    }
-  }
-}
-```
+Le zip contient **2 fichiers** (`Savior.exe` + sidecar capteurs) : le sidecar C# ne peut pas être fusionné dans un seul exe comme un AppImage Linux. Les deux doivent rester **dans le même dossier**.
 
-See [Tauri 2 NSIS docs](https://v2.tauri.app/reference/config/#nsisconfig) for portable bundle options.
+Prérequis machine cible : **WebView2** (présent sur Win10/11 à jour).
 
 ## Sidecar build (Windows only)
 
