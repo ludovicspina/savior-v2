@@ -8,6 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
+  // Required for Tauri production: absolute /assets paths break the webview loader.
+  base: "./",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
