@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <assemblyIdentity version="1.0.0.0" name="Savior.Sensord"/>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- Default: no admin required for basic sensor reads -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+        <!-- For deep mode (Ring0 driver), change to requireAdministrator and re-sign the binary -->
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>

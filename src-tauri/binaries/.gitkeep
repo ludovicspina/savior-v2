@@ -1,0 +1,2 @@
+# Binaries directory for Tauri external sidecar (Windows target-triple naming).
+# Populated by scripts/build-sidecar.sh — empty at scaffold time.
