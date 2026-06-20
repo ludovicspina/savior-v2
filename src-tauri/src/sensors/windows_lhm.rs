@@ -1,8 +1,6 @@
 use crate::sensors::{SensorSnapshot, SensorSource};
 use anyhow::Context;
 use parking_lot::Mutex;
-use std::io::Write;
-use std::process::Stdio;
 use std::sync::Arc;
 use tauri::AppHandle;
 use tauri_plugin_shell::process::{CommandChild, CommandEvent};
@@ -30,10 +28,7 @@ impl WindowsLhmSource {
             .app
             .shell()
             .sidecar("savior-sensord")
-            .context("failed to resolve savior-sensord sidecar")?
-            .stdin(Stdio::piped())
-            .stdout(Stdio::piped())
-            .stderr(Stdio::null());
+            .context("failed to resolve savior-sensord sidecar")?;
 
         let (mut rx, child) = sidecar.spawn().context("failed to spawn sidecar")?;
 
