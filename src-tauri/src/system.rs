@@ -91,6 +91,7 @@ fn linux_os_release() -> (Option<String>, Option<String>) {
     (name.or(Some("Linux".into())), version)
 }
 
+#[cfg(target_os = "linux")]
 fn trim_quotes(s: &str) -> String {
     s.trim_matches('"').to_string()
 }

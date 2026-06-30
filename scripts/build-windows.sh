@@ -17,6 +17,9 @@ is_windows_host() {
 
 if is_windows_host; then
   cargo tauri build --no-bundle
+  # --no-bundle does not copy externalBin; place sidecar next to savior.exe for runtime + packaging.
+  cp src-tauri/binaries/savior-sensord-x86_64-pc-windows-msvc.exe \
+    src-tauri/target/release/savior-sensord-x86_64-pc-windows-msvc.exe
   bash scripts/package-windows-portable.sh
   echo ""
   echo "Requires WebView2 runtime on target machine (pre-installed on Windows 10/11)."

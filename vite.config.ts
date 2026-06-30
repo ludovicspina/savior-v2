@@ -8,8 +8,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
-  // Required for Tauri production: absolute /assets paths break the webview loader.
-  base: "./",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
@@ -34,9 +32,15 @@ export default defineConfig({
   },
   envPrefix: ["VITE_", "TAURI_"],
   build: {
-    // WebKitGTK (Linux) and WebView2 (Windows) both support modern ES; safari13 is too old for Vue 3 + Vite 8.
+    // Tauri serves assets from its custom protocol root; avoid relative base + code-split URLs.
     target: process.env.TAURI_ENV_PLATFORM === "windows" ? "chrome105" : "es2021",
     minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
+    rollupOptions: {
+      output: {
+        // Keep one JS bundle so lazy route chunks cannot 404 inside the webview.
+        inlineDynamicImports: true,
+      },
+    },
   },
 });

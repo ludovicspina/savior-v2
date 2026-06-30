@@ -8,15 +8,21 @@ VERSION=$(node -p "require('./package.json').version")
 RELEASE="$ROOT/src-tauri/target/release"
 STAGING="$ROOT/src-tauri/target/release/bundle/portable/Savior"
 ZIP="$ROOT/src-tauri/target/release/bundle/Savior_${VERSION}_x64-portable.zip"
-SIDECAR="$RELEASE/savior-sensord-x86_64-pc-windows-msvc.exe"
+SIDECAR_RELEASE="$RELEASE/savior-sensord-x86_64-pc-windows-msvc.exe"
+SIDECAR_BINARIES="$ROOT/src-tauri/binaries/savior-sensord-x86_64-pc-windows-msvc.exe"
 
 if [[ ! -f "$RELEASE/savior.exe" ]]; then
   echo "Missing $RELEASE/savior.exe — run cargo tauri build --no-bundle first." >&2
   exit 1
 fi
 
-if [[ ! -f "$SIDECAR" ]]; then
-  echo "Missing sidecar $SIDECAR — run scripts/build-sidecar.sh first." >&2
+if [[ -f "$SIDECAR_RELEASE" ]]; then
+  SIDECAR="$SIDECAR_RELEASE"
+elif [[ -f "$SIDECAR_BINARIES" ]]; then
+  SIDECAR="$SIDECAR_BINARIES"
+else
+  echo "Missing sidecar — run scripts/build-sidecar.sh first." >&2
+  echo "  Expected: $SIDECAR_BINARIES" >&2
   exit 1
 fi
 

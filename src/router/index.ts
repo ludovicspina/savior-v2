@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import { MODULES } from "@/modules/registry";
 
 const moduleRoutes = MODULES.map((module) => ({
@@ -9,7 +9,8 @@ const moduleRoutes = MODULES.map((module) => ({
 }));
 
 export const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // Hash history is reliable inside Tauri's custom protocol (history mode often white-screens).
+  history: createWebHashHistory(),
   routes: [
     { path: "/", redirect: "/dashboard" },
     ...moduleRoutes,
