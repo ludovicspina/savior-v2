@@ -66,6 +66,17 @@ export const MODULES: SaviorModule[] = [
     description: "Diagnostic réseau, latence, interfaces et connectivité.",
   },
   {
+    id: "license",
+    label: "Licence Windows",
+    icon: "key",
+    group: "diagnostic",
+    route: "/license",
+    component: () => import("@/views/LicenseView.vue"),
+    platforms: ["windows"],
+    status: "ready",
+    description: "État d'activation Windows, dépannage et paramètres système.",
+  },
+  {
     id: "logs",
     label: "Journaux système",
     icon: "file-text",

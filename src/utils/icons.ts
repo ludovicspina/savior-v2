@@ -5,6 +5,7 @@ import {
   FileText,
   Gauge,
   HelpCircle,
+  KeyRound,
   Network,
   Package,
   Settings,
@@ -24,6 +25,7 @@ const ICON_MAP: Record<string, Component> = {
   shield: Shield,
   "shield-check": ShieldCheck,
   settings: Settings,
+  key: KeyRound,
 };
 
 export function resolveModuleIcon(name: string): Component {

@@ -1,6 +1,7 @@
 mod commands;
 mod sensors;
 mod system;
+mod windows_license;
 
 use commands::SensorState;
 use sensors::create_source;
@@ -25,6 +26,9 @@ pub fn run() {
             system::is_elevated,
             system::current_os,
             commands::set_deep_mode,
+            windows_license::windows_license_status,
+            windows_license::windows_open_activation_settings,
+            windows_license::windows_license_placeholder_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
